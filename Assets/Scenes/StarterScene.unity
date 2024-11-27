@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5490521, g: 0.795813, b: 0.97286266, a: 1}
+  m_IndirectSpecularColor: {r: 0.54934484, g: 0.79545444, b: 0.97348726, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -363,7 +363,6 @@ MonoBehaviour:
   bulletSpeed: 20
   fireRate: 0.1
   cameraTransform: {fileID: 244137036}
-  bulletDirection: 2
   spawnDistance: 1
   shootSound: {fileID: 8300000, guid: 3dbddbc44c42de1499eceb290513c404, type: 3}
   bulletLifetime: 5

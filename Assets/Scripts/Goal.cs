@@ -27,8 +27,9 @@ public class Goal : MonoBehaviour
             {
                 g.SetActive(true);
             }
-        }
-        StartCoroutine(EndScreenDisplay());
+			StartCoroutine(EndScreenDisplay());
+		}
+  
     }
 
     IEnumerator EndScreenDisplay()
