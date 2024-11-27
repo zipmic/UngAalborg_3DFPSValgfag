@@ -6,13 +6,12 @@ public class Gun : MonoBehaviour
 	public Rigidbody bulletPrefab; // Kuglens prefab (med Rigidbody)
 	public float bulletSpeed = 20f; // Kuglens hastighed
 	public float fireRate = 0.5f; // Skudhastighed i sekunder
-	public Transform cameraTransform; // Referencen til kameraet
+	public Transform bulletSpawnTransform;
 	public float spawnDistance = 1f; // Afstand fra kameraet, hvor kuglen spawner
 	public AudioClip shootSound; // Lydeffekt for skuddet
 	public float bulletLifetime = 5f; // Tiden før kuglen destrueres
 
 	[Header("Effects")]
-	public ParticleSystem muzzleFlash; // Muzzle flash partikel (valgfri)
 	public Vector2 pitchRange = new Vector2(-2f, 2f); // Range for random pitch
 
 	private float nextFireTime = 0f; // Tidspunkt for næste skud
@@ -37,11 +36,11 @@ public class Gun : MonoBehaviour
 	void Shoot()
 	{
 		// Bestem spawn-positionen baseret på kameraets position og retning
-		Vector3 spawnPosition = cameraTransform.position + cameraTransform.forward * spawnDistance;
+		Vector3 spawnPosition = bulletSpawnTransform.position + bulletSpawnTransform.forward * spawnDistance;
 
 		// Instantiér kuglen og sæt dens retning og hastighed
-		Rigidbody bulletInstance = Instantiate(bulletPrefab, spawnPosition, cameraTransform.rotation);
-		bulletInstance.velocity = cameraTransform.forward * bulletSpeed;
+		Rigidbody bulletInstance = Instantiate(bulletPrefab, spawnPosition, bulletSpawnTransform.rotation);
+		bulletInstance.velocity = bulletSpawnTransform.forward * bulletSpeed;
 
 		// Destruer kuglen efter bulletLifetime sekunder
 		Destroy(bulletInstance.gameObject, bulletLifetime);
@@ -53,24 +52,18 @@ public class Gun : MonoBehaviour
 			audioSource.PlayOneShot(shootSound);
 		}
 
-		// Afspil muzzle flash, hvis den er sat
-		if (muzzleFlash != null)
-		{
-			muzzleFlash.Play();
-		}
-
 		Debug.Log("Skud affyret fremad.");
 	}
 
 	void OnDrawGizmos()
 	{
 		// Tjek om kameraTransform er sat
-		if (cameraTransform != null)
+		if (bulletSpawnTransform != null)
 		{
 			// Tegn en rød linje fra kameraets position til spawn-positionen
 			Gizmos.color = Color.red;
-			Vector3 spawnPosition = cameraTransform.position + cameraTransform.forward * spawnDistance;
-			Gizmos.DrawLine(cameraTransform.position, spawnPosition);
+			Vector3 spawnPosition = bulletSpawnTransform.position + bulletSpawnTransform.forward * spawnDistance;
+			Gizmos.DrawLine(bulletSpawnTransform.position, spawnPosition);
 		}
 	}
 }

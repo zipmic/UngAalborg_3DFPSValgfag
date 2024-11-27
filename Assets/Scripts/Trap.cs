@@ -7,7 +7,7 @@ public class Trap : MonoBehaviour
 	{
 		if (player.CompareTag("Player"))
 		{
-			Destroy(player);
+			player.GetComponent<PlayerDeath>().KillPlayer();
 		}
 	}
 
