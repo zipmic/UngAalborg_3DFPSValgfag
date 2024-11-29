@@ -15,7 +15,7 @@ public class RotateAroundAxis : MonoBehaviour
 
 	void Update()
 	{
-		// Vælg akse baseret på enum og roter omkring den
+		// Vï¿½lg akse baseret pï¿½ enum og roter omkring den
 		switch (rotationAxis)
 		{
 			case RotationAxis.X:

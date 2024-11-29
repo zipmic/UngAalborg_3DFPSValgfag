@@ -1,45 +1,66 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Goal : MonoBehaviour
 {
+    [Header("Game Objects to Activate")]
+    public GameObject[] GOToActivateOnTouch; // Objekter, der aktiveres ved mål
+    public GameObject EndScreentoActivate; // Endskærm, der aktiveres
+    public float TimeFromGoalToEndscreenDisplay; // Forsinkelse før endskærmen vises
 
-    public GameObject[] GOToActivateOnTouch;
-    public GameObject EndScreentoActivate;
-    public float TimeFromGoalToEndscreenDisplay;
+    [Header("Audio Settings")]
+    public AudioClip goalSound; // Lydklip, der afspilles ved mål
 
-    // Start is called before the first frame update
+    private AudioSource audioSource;
+
     void Start()
     {
-      foreach(GameObject g in GOToActivateOnTouch)
+        // Find AudioSource-komponenten
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            Debug.LogError("Ingen AudioSource fundet på " + gameObject.name);
+        }
+
+        // Deaktiver alle objekter, der skal aktiveres ved mål
+        foreach (GameObject g in GOToActivateOnTouch)
         {
             g.SetActive(false);
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
+            // Aktiver de angivne GameObjects
             foreach (GameObject g in GOToActivateOnTouch)
             {
                 g.SetActive(true);
             }
-			StartCoroutine(EndScreenDisplay());
-		}
-  
+
+            // Afspil målets lydklip
+            if (goalSound != null)
+            {
+                audioSource.PlayOneShot(goalSound);
+            }
+
+            // Start coroutine for at vise endskærmen
+            StartCoroutine(EndScreenDisplay());
+        }
     }
 
     IEnumerator EndScreenDisplay()
     {
-
+        // Vent det angivne antal sekunder
         yield return new WaitForSeconds(TimeFromGoalToEndscreenDisplay);
+
+        // Vis endskærmen
         if (EndScreentoActivate != null)
         {
             EndScreentoActivate.SetActive(true);
         }
-
     }
 }
