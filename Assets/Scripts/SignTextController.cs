@@ -1,11 +1,11 @@
 using UnityEngine;
 using TMPro;
 
-[ExecuteAlways] // Gør, at scriptet kører i edit-mode
+[ExecuteAlways] // Gï¿½r, at scriptet kï¿½rer i edit-mode
 public class SignTextController : MonoBehaviour
 {
 	[Header("Sign Settings")]
-	[TextArea] public string signText = "Skriv din tekst her"; // Tekst, som skal vises på skiltet
+	[TextArea] public string signText = "Skriv din tekst her"; // Tekst, som skal vises pï¿½ skiltet
 
 	private TextMeshPro textMeshPro;
 
@@ -22,11 +22,9 @@ public class SignTextController : MonoBehaviour
 
 	void Update()
 	{
-		// Kun opdatér teksten, hvis scriptet kører i editor eller spillet er aktivt
-		if (!Application.isPlaying)
-		{
+	
 			UpdateSignText();
-		}
+		
 	}
 
 	/// <summary>
