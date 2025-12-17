@@ -40,7 +40,7 @@ public class Gun : MonoBehaviour
 
 		// Instantiér kuglen og sæt dens retning og hastighed
 		Rigidbody bulletInstance = Instantiate(bulletPrefab, spawnPosition, bulletSpawnTransform.rotation);
-		bulletInstance.velocity = bulletSpawnTransform.forward * bulletSpeed;
+		bulletInstance.linearVelocity = bulletSpawnTransform.forward * bulletSpeed;
 
 		// Destruer kuglen efter bulletLifetime sekunder
 		Destroy(bulletInstance.gameObject, bulletLifetime);

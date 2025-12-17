@@ -106,7 +106,7 @@ public class LiftObject : MonoBehaviour
         if (liftedRigidbody != null)
         {
             // Kast objektet fremad.
-            liftedRigidbody.velocity = playerCamera.transform.forward * throwForce;
+            liftedRigidbody.linearVelocity = playerCamera.transform.forward * throwForce;
 
             // Drop objektet efter kast.
             DropObject();

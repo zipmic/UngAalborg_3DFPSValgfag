@@ -35,7 +35,7 @@ public class JumpPad : MonoBehaviour
 			{
 				// Apply an upward force to the player
 				Vector3 jumpForce = Vector3.up * jumpPower;
-				playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, 0, playerRigidbody.velocity.z); // Reset vertical velocity
+				playerRigidbody.linearVelocity = new Vector3(playerRigidbody.linearVelocity.x, 0, playerRigidbody.linearVelocity.z); // Reset vertical velocity
 				playerRigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
 
 				// Play the jump sound

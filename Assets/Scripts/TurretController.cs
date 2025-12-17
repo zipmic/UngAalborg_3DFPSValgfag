@@ -133,7 +133,7 @@ public class TurretController : MonoBehaviour
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             if (bulletRb != null)
             {
-                bulletRb.velocity = shootPoint.forward * bulletSpeed;
+                bulletRb.linearVelocity = shootPoint.forward * bulletSpeed;
             }
             Destroy(bullet, 5f);
 
