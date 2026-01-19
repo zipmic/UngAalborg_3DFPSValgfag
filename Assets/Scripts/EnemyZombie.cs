@@ -1,11 +1,15 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class EnemyZombie : MonoBehaviour
 {
     [Header("Detection")]
     public float chaseDistance = 8f;
     public float runSpeed = 3.5f;
+
+    [Header("Audio")]
+    public AudioClip deathSound;
 
     private static readonly int IsRunningHash = Animator.StringToHash("IsRunning");
     private static readonly int IsWalkingHash = Animator.StringToHash("IsWalking");
@@ -15,6 +19,7 @@ public class EnemyZombie : MonoBehaviour
 
     private Animator _animator;
     private Rigidbody _rigidbody;
+    private AudioSource _audioSource;
     private Transform _player;
     private bool _hasDetectedPlayer;
     private bool _isDead;
@@ -23,6 +28,7 @@ public class EnemyZombie : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
+        _audioSource = GetComponent<AudioSource>();
         FindPlayer();
     }
 
@@ -84,6 +90,11 @@ public class EnemyZombie : MonoBehaviour
             SetRunning(false);
             SetWalking(false);
             SetAttacking(false);
+
+            if (_audioSource != null && deathSound != null)
+            {
+                _audioSource.PlayOneShot(deathSound);
+            }
 
             if (Random.value < 0.5f)
             {

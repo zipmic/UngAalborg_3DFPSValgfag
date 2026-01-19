@@ -23,7 +23,7 @@ public class Deathzone : MonoBehaviour
 		meshRenderer = GetComponent<MeshRenderer>();
 		if (meshRenderer != null)
 		{
-			meshRenderer.enabled = false;
+			//meshRenderer.enabled = false;
 		}
 
 		/*// Ensure collider is always set to trigger (optional if you want it to be a trigger)
